@@ -9,7 +9,8 @@ export class ProductListComponent {
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
-    toggleImage(): void { this.showImage = !this.showImage; }
+    toggleImage(): void { this.showImage = !this.showImage; };
+    listFilter: string = 'cart';
     products: any[] = [
                 {
                     "productId": 1,
