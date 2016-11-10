@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit{
     ngOnInit(): void {
         console.log('In Oninit');
     };
+    onRatingClicked(message: string): void {this.pageTitle = 'Product list ' + message;};
     products: IProduct[] = [
                 {
                     "productId": 1,
