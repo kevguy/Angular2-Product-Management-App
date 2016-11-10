@@ -22,9 +22,13 @@ export class ProductListComponent implements OnInit{
     showImage: boolean = false;
     toggleImage(): void { this.showImage = !this.showImage; };
     listFilter: string = 'cart';
+    errorMessage: string;
     ngOnInit(): void {
         console.log('In Oninit');
-        this.products = this._productService.getProducts();
+        this._productService.getProducts()
+                .subscribe(
+                    products => this.products = products,
+                    error => this.errorMessage = <any>error);
     };
     onRatingClicked(message: string): void {this.pageTitle = 'Product list ' + message;};
     products: IProduct[];
