@@ -1,35 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }  from '@angular/core';
 
 import { IProduct } from './product';
-
 import { ProductService } from './product.service';
 
-
-
 @Component({
-    selector: 'pm-products',
-    moduleId: module.id, 
-    templateUrl: 'product-list.component.html',
-    styleUrls: ['product-list.component.css']
+    templateUrl: 'app/products/product-list.component.html',
+    styleUrls: ['app/products/product-list.component.css']
 })
-export class ProductListComponent implements OnInit{
-    constructor(private _productService: ProductService){
-
-    };
+export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List';
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
-    toggleImage(): void { this.showImage = !this.showImage; };
-    listFilter: string = 'cart';
+    listFilter: string;
     errorMessage: string;
-    ngOnInit(): void {
-        console.log('In Oninit');
-        this._productService.getProducts()
-                .subscribe(
-                    products => this.products = products,
-                    error => this.errorMessage = <any>error);
-    };
-    onRatingClicked(message: string): void {this.pageTitle = 'Product list ' + message;};
+
     products: IProduct[];
+
+    constructor(private _productService: ProductService) {
+
+    }
+
+    toggleImage(): void {
+        this.showImage = !this.showImage;
+    }
+
+    ngOnInit(): void {
+        this._productService.getProducts()
+                .subscribe(products => this.products = products,
+                           error => this.errorMessage = <any>error);
+    }
+
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Product List: ' + message;
+    }
 }
